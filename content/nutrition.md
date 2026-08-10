@@ -3,11 +3,11 @@ title: Nutrition
 permalink: /nutrition/
 ---
 
-The eating side of the plan, built around how you actually want to eat: **no
-breakfast, a 16:8 fast, two real meals, everything prepped ahead and
-reheated into a burrito.** The research says this works exactly as well as
-any other calorie-matched diet — and sticks better, because it's the pattern
-you'd pick anyway.
+The eating side of the plan, built around how you actually want to eat:
+**no breakfast, a 16:8 fast, two real meals, and no elaborate cooking —
+ever.** The research says this pattern works exactly as well as any other
+calorie-matched diet, and sticks better, because it's the pattern you'd
+pick anyway. The design rule for every meal here: **assemble, don't cook.**
 
 ## The numbers
 
@@ -25,55 +25,47 @@ you'd pick anyway.
 | When | What | ~kcal | ~protein |
 |---|---|---|---|
 | Morning | Water, black coffee. That's it — you weren't eating breakfast anyway. | 0 | 0 |
-| Noon | **Burrito #1** + greek yogurt cup with hot sauce (the "sour cream" dip) | 900 | 80 g |
-| ~7pm | **Burrito #2** + salsa on top + bagged salad or microwave frozen veg + a piece of fruit | 1,000 | 70 g |
-| Before 8pm | Only if protein is short: a shake or a skyr/greek yogurt | 150 | 25 g |
+| Noon | Meal 1: big protein + starch + something from a bag | 900 | 75 g |
+| ~7pm | Meal 2: same idea, different combination | 1,000 | 75 g |
+| Before 8pm | Only if protein is short: a shake or a greek yogurt/skyr | 150 | 25 g |
 | **Total** | | **~2,100** | **~160–175 g** |
 
-## The Sunday batch (~90 minutes, makes 10–14 burritos)
+## How a meal gets built (60 seconds, no recipe)
 
-**Cook (mostly hands-off):**
+Pick one from each column. That's the whole cooking method.
 
-1. **Salsa chicken** — 4–5 lb chicken thighs + a jar of salsa in the slow
-   cooker or oven, shred. Stays moist through freezing; breast works if you
-   prefer, thighs forgive reheating better.
-2. **Taco beef** — 2 lb 93% lean ground beef + taco seasoning.
-3. **Rice** — 3–4 cups dry, rice cooker or pot.
-4. Open cans: **refried beans** and/or black beans.
+| Protein (the anchor) | Starch | From a bag | Flavor |
+|---|---|---|---|
+| Rotisserie chicken | Microwave rice pouch | Bagged salad kit | Salsa |
+| Pre-cooked grilled chicken strips | Tortillas | Frozen steamer veg | Hot sauce |
+| Canned chicken or tuna | Instant mashed potatoes | Frozen roasted potatoes | Greek yogurt + hot sauce ("sour cream") |
+| 93% ground beef (one pan, 8 min) | Bread / buns | Coleslaw mix | BBQ sauce (easy on it) |
+| Eggs (scramble, 5 min) | Microwave baked potato | | Taco seasoning |
+| Pre-cooked sausage / deli turkey | Canned beans | | Shredded cheese (measure it) |
+| Cottage cheese / greek yogurt / skyr | | | |
 
-**Assemble** (per large 10" tortilla): ~6 oz meat, ⅓ cup rice, ⅓ cup
-refried beans, 1 oz shredded cheese. **≈ 800 kcal, 60–65 g protein each.**
+Ten meals that fall out of that table with zero thought: chicken +
+rice-pouch + salsa bowl · tuna melt · rotisserie chicken + microwave potato ·
+taco-seasoned beef over rice · eggs + sausage + toast (at noon — dinner
+rules don't apply to a guy with no breakfast) · chicken caesar from a salad
+kit · loaded baked potato with chicken and cheese · deli turkey sandwiches
+(two of them — protein math) · cottage cheese + fruit + toast alongside
+anything short · and yes, everything in column one rolls into a tortilla and
+becomes a burrito. The joke was always structurally sound.
 
-**The anti-soggy rules** (learned by everyone who's done this before you):
+## Batch day — optional, for when you feel like it
 
-- Let fillings cool before rolling — steam inside = wet tortilla.
-- **Nothing wet goes inside.** Salsa, pico, sour cream, guac: on top or on
-  the side, after reheating. Refried beans and cheese inside are fine —
-  they're the moisture barrier.
-- Roll tight, wrap individually (foil or parchment), **flash-freeze on a
-  sheet pan**, then into gallon freezer bags. Good for 2–3 months.
+Not required. But 30 non-elaborate minutes on a Sunday makes the week
+dumber, in a good way:
 
-**Reheat:** damp paper towel, microwave ~2–2½ min from frozen, flip halfway.
-If you care about crispy: microwave 90 seconds to thaw, then 6–7 min in an
-air fryer or a hot pan. Reheat until actually hot all the way through.
-
-## Rotation (so you don't quit from boredom)
-
-Same skeleton, swap the protein each batch week:
-
-- **Week A:** salsa chicken + taco beef
-- **Week B:** carnitas-style pork shoulder + chicken
-- **Week C:** "breakfast" burritos — eggs, sausage, potato, cheese — eaten
-  at noon like everything else. Skipping breakfast doesn't mean skipping
-  breakfast *food*.
-
-## Shopping list (batch week)
-
-Chicken thighs (4–5 lb) · ground beef 93% (2 lb) · large flour tortillas
-(10-count ×2) · rice · refried beans (2–3 cans) · shredded cheese (1 lb) ·
-jarred salsa (2) · taco seasoning · plain nonfat greek yogurt or skyr
-(big tub + hot sauce) · bagged salad / frozen veg · fruit · protein powder
-(backstop for short days)
+- **Slow cooker salsa chicken:** 4–5 lb thighs + a jar of salsa, 6 hours,
+  shred with two forks. One pot, one effort, protein for the whole week.
+- Or brown 2 lb of ground beef with taco seasoning. Eight minutes.
+- Fridge: 3–4 days in sealed containers. Freezer: ~2 months.
+- If you do wrap some into burritos: cool the filling first, nothing wet
+  inside (salsa and yogurt go on after reheating), wrap individually,
+  freeze flat. Damp paper towel, ~2 min microwave from frozen, hot all the
+  way through.
 
 ## Fasting rules of engagement
 
@@ -95,6 +87,6 @@ jarred salsa (2) · taco seasoning · plain nonfat greek yogurt or skyr
   Adherence is the whole game; this is the pattern you already live.
 - Fasting's one real risk while cutting is muscle. The fix is exactly what
   this plan does: [big per-meal protein doses](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5828430/)
-  (way past the ~30 g that maximally stimulates a single meal's muscle
+  (well past the ~30 g that maximally stimulates a single meal's muscle
   protein synthesis, because there are only two of them) plus the strength
   work in the weekly plan.
