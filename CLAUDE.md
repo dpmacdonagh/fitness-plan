@@ -32,6 +32,10 @@ heroics; month-sized patience.
   Notes lines under each day = how it went. Frontmatter `weighIns:` = weight
   data (drives every chart).
 - `content/rules.md` — permanent constraints. Only edit if Dan says so.
+- `content/nutrition.md` — the eating plan: 16:8 fast (noon–8pm window, no
+  breakfast), ~2,100–2,200 kcal, 150–180 g protein in 2–3 big hits, freezer
+  burrito batch system. Calorie target moves with the weigh-in trend —
+  adjust it there when the corridor says so.
 - `content/exercises.md` + `content/js/rig.js` — exercise guide and animated
   demos. Pose data is the `EXERCISES` object in rig.js (world-space joint
   angles per keyframe).
@@ -68,7 +72,8 @@ heroics; month-sized patience.
    - **Weight dropping faster than ~2 lb/wk for 2+ weeks** → he's under-eating
      for the training; say so and ease the deficit.
    - **Weight flat for 3+ weeks with good adherence** → tighten nutrition
-     first (protein target 150–180 g/day), never punish with cardio.
+     first (drop the calorie target in `nutrition.md` by ~150–200, keep
+     protein at 150–180 g/day), never punish with cardio.
    - **~October** → begin converting elliptical sessions to stationary bike.
 4. Keep Thursday-style conditional days ("boil calm = elliptical, angry =
    walk") — the plan bends around the skin protocol, never through it.

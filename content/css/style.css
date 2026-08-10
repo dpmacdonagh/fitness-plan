@@ -32,7 +32,8 @@ body {
 
 nav {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--rule);
   font-weight: 600;
@@ -284,6 +285,27 @@ ul.contains-task-list {
 
 .good {
   color: var(--viz-good);
+  font-weight: 600;
+}
+
+/* Content tables (e.g. the day template on the nutrition page) */
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.02rem;
+  margin: 1rem 0;
+}
+
+main th,
+main td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5rem 0.6rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+main th {
+  color: var(--muted);
   font-weight: 600;
 }
 
