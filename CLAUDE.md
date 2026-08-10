@@ -88,5 +88,6 @@ heroics; month-sized patience.
 
 ## Git
 
-Work on the repo's default branch and push there; the deploy workflow listens
-to it (plus `main`, for when the default branch is eventually renamed).
+Work on `main` and push there — it's the branch the deploy workflow listens
+to. (If GitHub still shows an old `claude/...` branch as the repo default,
+that's a leftover from the repo's first day; `main` is canonical.)
