@@ -135,3 +135,188 @@ ul.contains-task-list {
   font-size: 1rem;
   margin-left: 0.6rem;
 }
+
+.badge {
+  float: right;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Exercise demo figures */
+.demo {
+  margin: 1.25rem 0 1.75rem;
+  padding: 0.75rem 0.75rem 0.25rem;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.demo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+}
+
+.demo figcaption {
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 0.4rem 0.4rem 0.6rem;
+}
+
+.rig-bone {
+  stroke: var(--text);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.rig-far {
+  opacity: 0.35;
+}
+
+.rig-head {
+  fill: var(--text);
+}
+
+.rig-ground {
+  stroke: var(--rule);
+  stroke-width: 2;
+}
+
+.rig-prop {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+  opacity: 0.7;
+}
+
+/* Charts — palette per role, both themes (dataviz reference palette) */
+:root {
+  --viz-series1: #2a78d6;
+  --viz-grid: #e1e0d9;
+  --viz-axis: #c3c2b7;
+  --viz-muted: #898781;
+  --viz-good: #006300;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --viz-series1: #3987e5;
+    --viz-grid: #2c2c2a;
+    --viz-axis: #383835;
+    --viz-good: #0ca30c;
+  }
+}
+
+.viz {
+  margin: 1rem 0 2rem;
+}
+
+.viz svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.viz-note {
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.viz-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.viz-legend .key {
+  display: inline-block;
+  width: 18px;
+  height: 0;
+  border-top: 2px solid var(--viz-series1);
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+
+.viz-legend .key-dash {
+  border-top-style: dashed;
+}
+
+.viz-legend .key-band {
+  height: 10px;
+  border: none;
+  background: var(--viz-series1);
+  opacity: 0.15;
+}
+
+/* Stat tiles */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.tile {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 0.8rem 0.9rem;
+}
+
+.tile-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.tile-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0.15rem 0;
+}
+
+.tile-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.good {
+  color: var(--viz-good);
+  font-weight: 600;
+}
+
+/* Data table fallback */
+.viz-table summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.viz-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  margin-top: 0.75rem;
+}
+
+.viz-table th,
+.viz-table td {
+  text-align: left;
+  padding: 0.45rem 0.6rem 0.45rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.viz-table th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Coach notes callout on week pages */
+.coach-notes {
+  border-left: 3px solid var(--accent);
+  padding: 0.2rem 0 0.2rem 1rem;
+  margin: 1.25rem 0;
+  color: var(--muted);
+}
