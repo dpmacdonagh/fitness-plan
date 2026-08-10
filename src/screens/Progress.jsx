@@ -2,7 +2,45 @@ import { useState } from "react";
 import { WEEKS, PLAN, MILESTONES, dateKey } from "../data/weeks.js";
 import { weekAdherence } from "../lib/plan.js";
 import { WeightChart, AdherenceChart, mergedWeighIns } from "../components/Charts.jsx";
-import { addWeight } from "../store.js";
+import { addWeight, getToken, setToken } from "../store.js";
+
+function SyncCard({ store }) {
+  const [tok, setTok] = useState(getToken());
+  const st = store.sync;
+  return (
+    <section className="card">
+      <div className="card-tag">Sync across devices</div>
+      <p className="note">
+        Saves your checkmarks, meals, pantry, and weigh-ins to this app's own
+        GitHub repo so every device sees the same state. Reads happen
+        automatically; to <em>write</em> from this device, paste a token once:
+        github.com → Settings → Developer settings → Fine-grained tokens →
+        Generate. Repository access: <strong>only dpmacdonagh/fitness-plan</strong>;
+        Permissions: <strong>Contents — Read and write</strong>.
+      </p>
+      <form
+        className="weigh-form"
+        onSubmit={(e) => { e.preventDefault(); setToken(tok.trim()); }}
+      >
+        <input
+          type="password"
+          placeholder="github_pat_…"
+          value={tok}
+          onChange={(e) => setTok(e.target.value)}
+          style={{ width: "100%", maxWidth: "18rem" }}
+        />
+        <button className="btn" type="submit">Save</button>
+      </form>
+      <p className="note">
+        {st.status === "off" && "Sync: off (this device is read-only — changes stay local)."}
+        {st.status === "idle" && "Sync: on, waiting for changes."}
+        {st.status === "syncing" && "Sync: saving…"}
+        {st.status === "ok" && `Sync: up to date${st.detail ? ` (${st.detail})` : ""}.`}
+        {st.status === "error" && `Sync error: ${st.detail} — check the token.`}
+      </p>
+    </section>
+  );
+}
 
 export default function ProgressScreen({ store }) {
   const pts = mergedWeighIns(store.weights);
@@ -21,7 +59,7 @@ export default function ProgressScreen({ store }) {
     <>
       <section className="card">
         <div className="card-tag">Log a weigh-in</div>
-        <p className="note">Morning, after the bathroom, before coffee. Saved on this device — tell your coach too, so it lands in the permanent record.</p>
+        <p className="note">Morning, after the bathroom, before coffee. With sync on, it lands in the shared record your coach reads.</p>
         <form
           className="weigh-form"
           onSubmit={(e) => {
@@ -72,6 +110,8 @@ export default function ProgressScreen({ store }) {
       <h2>Consistency</h2>
       <p className="note">This chart matters more than the weight — the weight follows the checkmarks.</p>
       <AdherenceChart rows={rows} />
+
+      <SyncCard store={store} />
 
       <h2>Milestones</h2>
       <ul className="milestones">

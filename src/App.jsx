@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useStore } from "./store.js";
+import { useStore, initSync } from "./store.js";
 import { WEEKS, findToday } from "./data/weeks.js";
 import { weekAdherence } from "./lib/plan.js";
 import DayCard from "./components/DayCard.jsx";
@@ -33,6 +33,7 @@ function fmtDate(d) {
 
 export default function App() {
   const store = useStore();
+  useEffect(() => { initSync(); }, []);
   const [tab, setTab] = useHashTab();
   const now = new Date();
   const { week, dayIndex, current } = findToday(now);
@@ -56,7 +57,7 @@ export default function App() {
         {tab === "today" && (
           <>
             {week.focus && <p className="focus">{week.focus}</p>}
-            <DayCard week={week} day={day} localDone={store.done} pantry={store.pantry} shopChecked={store.shopChecked} isToday />
+            <DayCard week={week} day={day} store={store} isToday />
           </>
         )}
 
@@ -73,7 +74,7 @@ export default function App() {
                 </button>
               ))}
             </div>
-            <DayCard week={week} day={week.days[weekDay]} localDone={store.done} pantry={store.pantry} shopChecked={store.shopChecked} />
+            <DayCard week={week} day={week.days[weekDay]} store={store} />
           </>
         )}
 
@@ -82,12 +83,12 @@ export default function App() {
             <section className="card">
               <div className="card-tag">This week's shopping</div>
               <p className="note">Computed from the week's prescribed meals minus your pantry, rounded to real packages.</p>
-              <Shopping week={week} pantry={store.pantry} shopChecked={store.shopChecked} />
+              <Shopping week={week} store={store} />
             </section>
             <section className="card">
               <div className="card-tag">Pantry</div>
               <p className="note">What you already have, in servings. Buying via the button fills this in; eat off-plan, knock it down by hand.</p>
-              <Pantry pantry={store.pantry} />
+              <Pantry store={store} />
             </section>
           </>
         )}

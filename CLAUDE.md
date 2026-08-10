@@ -36,10 +36,19 @@ data. Celebrate checkmarks. Month-sized patience.
 - `src/data/foods.js` — food database + `TARGET` calorie/protein numbers.
 - `src/data/exercises.js` — exercise library: cues, cautions, and the
   animated rig poses (world-space joint angles; screenshot-verify changes).
-- Device-only state (Dan's phone, invisible to you): his in-app checkmarks,
-  in-app weigh-ins, pantry, shopping ticks (localStorage, `src/store.js`).
-  The app merges his local ticks with your canonical `done` — so **ask him
-  what he did, then record it in `weeks.js`** to make it permanent.
+- **App state syncs to the `app-state` branch** (`data/state.json`): his
+  checkmarks, in-app weigh-ins, meal edits, custom foods, pantry, shopping
+  ticks. The app pulls it on load (public raw URL) and pushes with a
+  fine-grained PAT Dan pasted in Progress → Sync. Pushes to `app-state`
+  do NOT trigger deploys. **Before coaching, read it:**
+  `git fetch origin app-state && git show FETCH_HEAD:data/state.json` —
+  that's his live, cross-device truth. Never force-push or rewrite that
+  branch; the app owns it. Weekly, fold what you see there into `weeks.js`
+  (`done` flags, weigh-ins) so the permanent record matches reality.
+- Kitchen context: he cooks in a **Ninja Foodi Steam & Crisp (small)** —
+  dinner `how` strings carry the settings. Lunches are packed for work and
+  microwaved there. No weeknight chopping — veg comes from Sunday bins or
+  pre-cut bags. Keep all of that true in any week you program.
 
 ## When Dan checks in
 

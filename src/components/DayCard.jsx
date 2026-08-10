@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { FOODS, TARGET, mealTotals, dayMealTotals } from "../data/foods.js";
+import { getFood, CATS, FOODS, TARGET, mealTotals, dayMealTotals } from "../data/foods.js";
 import { EXERCISES } from "../data/exercises.js";
-import { doneId, isDone } from "../lib/plan.js";
-import { toggleDone } from "../store.js";
+import { doneId, isDone, mealId, effectiveMeal, effectiveMeals } from "../lib/plan.js";
+import { toggleDone, setMeal, resetMeal, addCustomFood } from "../store.js";
 import Rig from "./Rig.jsx";
 import Meter from "./Meter.jsx";
 import Shopping from "./Shopping.jsx";
@@ -37,10 +37,114 @@ function WorkoutItem({ item }) {
   );
 }
 
-const SLOT_LABELS = { m1: "Meal 1 · noon", m2: "Meal 2 · evening", m3: "Top-up · before 8pm" };
+function CustomFoodForm({ onAdd }) {
+  const [name, setName] = useState("");
+  const [kcal, setKcal] = useState("");
+  const [protein, setProtein] = useState("");
+  return (
+    <form
+      className="custom-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        const k = parseFloat(kcal), p = parseFloat(protein);
+        if (name.trim() && k >= 0 && p >= 0) {
+          onAdd(name.trim(), k, p || 0);
+          setName(""); setKcal(""); setProtein("");
+        }
+      }}
+    >
+      <input placeholder="Food name" value={name} onChange={(e) => setName(e.target.value)} />
+      <input placeholder="kcal" type="number" inputMode="numeric" min="0" value={kcal} onChange={(e) => setKcal(e.target.value)} />
+      <input placeholder="protein g" type="number" inputMode="numeric" min="0" value={protein} onChange={(e) => setProtein(e.target.value)} />
+      <button className="btn" type="submit">Add</button>
+    </form>
+  );
+}
 
-export default function DayCard({ week, day, localDone, pantry, shopChecked, isToday }) {
-  const t = dayMealTotals(day.meals);
+const SLOT_LABELS = {
+  m1: "Lunch · noon",
+  m2: "Dinner · evening",
+  m3: "Snacks / top-up",
+};
+
+function MealEditor({ week, day, slot, store }) {
+  const [open, setOpen] = useState(false);
+  const id = mealId(week, day.key, slot);
+  const items = effectiveMeal(week, day, slot, store.mealEdits);
+  const edited = store.mealEdits[id] !== undefined;
+  const t = mealTotals(items, store.customFoods);
+  const how = day.how && day.how[slot];
+
+  const change = (next) => setMeal(id, next);
+  const removeOne = (idx) => {
+    const next = items.map((x) => ({ ...x }));
+    next[idx].q -= 1;
+    change(next.filter((x) => x.q > 0));
+  };
+  const add = (foodId) => {
+    const next = items.map((x) => ({ ...x }));
+    const ex = next.find((x) => x.id === foodId);
+    if (ex) ex.q += 1; else next.push({ id: foodId, q: 1 });
+    change(next);
+  };
+
+  return (
+    <div className="meal">
+      <div className="meal-head">
+        <strong>{SLOT_LABELS[slot]}{edited && <span className="edited-tag">edited</span>}</strong>
+        <span className="meal-macros">{Math.round(t.kcal)} kcal · {Math.round(t.protein)} g</span>
+      </div>
+      {how && <p className="how">{how}</p>}
+      <ul className="meal-items">
+        {items.map((it, i) => {
+          const f = getFood(it.id, store.customFoods);
+          if (!f) return null;
+          return (
+            <li key={i}>
+              <span>{f.name}{it.q > 1 ? ` ×${it.q}` : ""} <span className="serv">({f.serving})</span></span>
+              <button className="item-x" aria-label={`Remove one ${f.name}`} onClick={() => removeOne(i)}>−</button>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="meal-actions">
+        <button className="link-btn" onClick={() => setOpen(!open)}>{open ? "close" : "+ add / edit"}</button>
+        {edited && <button className="link-btn" onClick={() => resetMeal(id)}>reset to plan</button>}
+      </div>
+      {open && (
+        <div className="picker">
+          {CATS.map(([cat, label]) => (
+            <div key={cat}>
+              <div className="picker-cat">{label}</div>
+              <div className="picker-grid">
+                {Object.keys(FOODS).filter((fid) => FOODS[fid].cat === cat).map((fid) => (
+                  <button key={fid} className="food-btn" onClick={() => add(fid)}>
+                    <span className="food-name">{FOODS[fid].name}</span>
+                    <span className="food-info">{FOODS[fid].serving} · {FOODS[fid].kcal} kcal · {FOODS[fid].protein} g</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div className="picker-cat">My foods</div>
+          <div className="picker-grid">
+            {Object.keys(store.customFoods).map((fid) => (
+              <button key={fid} className="food-btn" onClick={() => add(fid)}>
+                <span className="food-name">{store.customFoods[fid].name}</span>
+                <span className="food-info">{store.customFoods[fid].kcal} kcal · {store.customFoods[fid].protein} g</span>
+              </button>
+            ))}
+          </div>
+          <CustomFoodForm onAdd={(name, kcal, protein) => add(addCustomFood(name, kcal, protein))} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function DayCard({ week, day, store, isToday }) {
+  const meals = effectiveMeals(week, day, store.mealEdits);
+  const t = dayMealTotals(meals, store.customFoods);
   const kcalOk = t.kcal >= TARGET.kcalLow && t.kcal <= TARGET.kcalHigh;
   const pOk = t.protein >= TARGET.pLow;
   return (
@@ -53,35 +157,18 @@ export default function DayCard({ week, day, localDone, pantry, shopChecked, isT
           {day.workout.items.map((item, i) => <WorkoutItem key={i} item={item} />)}
         </ul>
         {day.workout.after && <p className="after">{day.workout.after}</p>}
-        {day.workout.minutes > 0 || day.workout.items.length ? (
-          <DoneButton week={week} day={day} slot="workout" localDone={localDone}>
-            {day.workout.minutes === 0 ? "Rest day honored" : "Workout done"}
-          </DoneButton>
-        ) : null}
+        <DoneButton week={week} day={day} slot="workout" localDone={store.done}>
+          {day.workout.minutes === 0 ? "Rest day honored" : "Workout done"}
+        </DoneButton>
       </section>
 
       {/* EAT */}
       <section className="card">
         <div className="card-tag">Eat</div>
         <h3>Fast until noon · window closes 8pm</h3>
-        {["m1", "m2", "m3"].map((slot) => {
-          const items = day.meals[slot] || [];
-          const mt = mealTotals(items);
-          return (
-            <div key={slot} className="meal">
-              <div className="meal-head">
-                <strong>{SLOT_LABELS[slot]}</strong>
-                <span className="meal-macros">{Math.round(mt.kcal)} kcal · {Math.round(mt.protein)} g</span>
-              </div>
-              <ul className="meal-items">
-                {items.map((it, i) => {
-                  const f = FOODS[it.id];
-                  return <li key={i}>{f.name}{it.q > 1 ? ` ×${it.q}` : ""} <span className="serv">({f.serving})</span></li>;
-                })}
-              </ul>
-            </div>
-          );
-        })}
+        {["m1", "m2", "m3"].map((slot) => (
+          <MealEditor key={slot} week={week} day={day} slot={slot} store={store} />
+        ))}
         <Meter label={`Day total (target ${TARGET.kcalLow}–${TARGET.kcalHigh})`} value={t.kcal} unit="kcal" lo={TARGET.kcalLow} hi={TARGET.kcalHigh} max={3000} good={kcalOk} />
         <Meter label={`Protein (target ${TARGET.pLow}–${TARGET.pHigh})`} value={t.protein} unit="g" lo={TARGET.pLow} hi={TARGET.pHigh} max={220} good={pOk} />
       </section>
@@ -93,15 +180,15 @@ export default function DayCard({ week, day, localDone, pantry, shopChecked, isT
           <ul className="prep-list">
             {day.prep.map((p, i) => <li key={i}>{p}</li>)}
           </ul>
-          {day.shoppingDay && <Shopping week={week} pantry={pantry} shopChecked={shopChecked} />}
+          {day.shoppingDay && <Shopping week={week} store={store} />}
         </section>
       )}
 
       {/* HABITS */}
       <section className="card">
         <div className="card-tag">Every day</div>
-        <p className="habits-line">Shower after sweating · clean clothes · {["mon", "wed", "fri"].includes(day.key) ? "BP wash today" : "no BP wash today"} · water all morning, black coffee is fine</p>
-        <DoneButton week={week} day={day} slot="habits" localDone={localDone}>Habits done</DoneButton>
+        <p className="habits-line">Shower after sweating · clean clothes · {["mon", "wed", "fri"].includes(day.key) ? "BP wash today" : "no BP wash today"} · water all morning, black coffee & zero-cal drinks fine</p>
+        <DoneButton week={week} day={day} slot="habits" localDone={store.done}>Habits done</DoneButton>
       </section>
     </div>
   );
