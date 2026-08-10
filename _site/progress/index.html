@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Progress · Fitness Plan</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/">Plan</a>
+    <a href="/rules/">Rules</a>
+    <a href="/exercises/">Exercises</a>
+    <a href="/nutrition/">Food</a>
+    <a href="/weeks/">Weeks</a>
+    <a href="/progress/">Progress</a>
+  </nav>
+  <main>
+    <h1>Progress</h1>
+    <p>The plan in numbers: where the weight is against the target zone, and how
+consistently the work is getting done. Weigh-ins live in each week's file —
+tell Claude your weight and it lands here on the next deploy.</p>
+
+<div class="tiles"><div class="tile"><div class="tile-label">Current weight</div><div class="tile-value">250 lb</div><div class="tile-sub">starting point logged</div></div><div class="tile"><div class="tile-label">Weekly pace</div><div class="tile-value">—</div><div class="tile-sub">needs 2+ weigh-ins</div></div><div class="tile"><div class="tile-label">Projected Dec 31</div><div class="tile-value">on plan: 225–230</div><div class="tile-sub">at 1–1.5 lb/wk</div></div><div class="tile"><div class="tile-label">Week 1 adherence</div><div class="tile-value">0/8</div><div class="tile-sub">0% of checkboxes done</div></div></div>
+
+<h2>Weight</h2>
+<p class="viz-note">The shaded corridor is the plan: 1–1.5 lb per week from
+250 lb, landing at 225–230 lb by
+the end of 2026. Stay anywhere inside it and the year is won.</p>
+<div class="viz">
+  <div class="viz-legend">
+    <span><i class="key key-line"></i>Actual</span>
+    
+    <span><i class="key key-band"></i>Target zone (1–1.5 lb/wk)</span>
+  </div><svg viewBox="0 0 720 380" role="img" aria-label="Weight over time against the target zone"><line x1="44" y1="346" x2="644" y2="346" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="350" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">215</text><line x1="44" y1="305.75" x2="644" y2="305.75" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="309.75" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">220</text><line x1="44" y1="265.5" x2="644" y2="265.5" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="269.5" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">225</text><line x1="44" y1="225.25" x2="644" y2="225.25" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="229.25" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">230</text><line x1="44" y1="185" x2="644" y2="185" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="189" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">235</text><line x1="44" y1="144.75" x2="644" y2="144.75" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="148.75" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">240</text><line x1="44" y1="104.5" x2="644" y2="104.5" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="108.5" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">245</text><line x1="44" y1="64.25" x2="644" y2="64.25" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="68.25" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">250</text><line x1="44" y1="24" x2="644" y2="24" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="28" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">255</text><text x="44" y="370" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">Aug</text><text x="136.30769230769232" y="370" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">Sep</text><text x="262.1818181818182" y="370" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">Oct</text><text x="392.25174825174827" y="370" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">Nov</text><text x="518.1258741258741" y="370" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">Dec</text><line x1="44" y1="346" x2="644" y2="346" stroke="var(--viz-axis)" stroke-width="1"/><path d="M 44 64.25 L 644 228.6999999999999 L 644 310.92499999999995 Z" fill="var(--viz-series1)" opacity="0.09"/><text x="638" y="273.81249999999994" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">target zone</text><circle cx="44.0" cy="64.3" r="4.5" fill="var(--viz-series1)" stroke="var(--bg)" stroke-width="2"><title>2026-08-10: 250 lb</title></circle><text x="44" y="52.25" text-anchor="middle" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="13" fill="var(--text)">250 lb</text></svg></div>
+
+<h2>Consistency</h2>
+<p class="viz-note">Percent of each week's checkboxes actually checked.
+This chart matters more than the one above it — the weight follows the
+checkmarks, not the other way around.</p>
+<div class="viz"><svg viewBox="0 0 720 260" role="img" aria-label="Workouts completed per week, percent of checkboxes checked"><line x1="44" y1="228" x2="704" y2="228" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="232" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">0%</text><line x1="44" y1="177.5" x2="704" y2="177.5" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="181.5" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">25%</text><line x1="44" y1="127" x2="704" y2="127" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="131" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">50%</text><line x1="44" y1="76.5" x2="704" y2="76.5" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="80.5" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">75%</text><line x1="44" y1="26" x2="704" y2="26" stroke="var(--viz-grid)" stroke-width="1"/><text x="36" y="30" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">100%</text><line x1="73.25" y1="228" x2="97.25" y2="228" stroke="var(--viz-series1)" stroke-width="2"/><text x="85.25" y="220" text-anchor="middle" font-weight="600" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--text)">0%</text><text x="85.25" y="250" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" fill="var(--viz-muted)">W1</text><line x1="44" y1="228" x2="704" y2="228" stroke="var(--viz-axis)" stroke-width="1"/></svg></div>
+
+<details class="viz-table"><summary>View the data as a table</summary><table>
+  <tr><th>Week</th><th>Dates</th><th>Done</th><th>Weigh-ins</th></tr><tr><td>Week 1</td><td>Aug 10 – Aug 16, 2026</td><td>0/8 (0%)</td><td>2026-08-10: 250 lb</td></tr></table></details>
+
+<h2>Milestones</h2>
+
+<ul class="contains-task-list">
+  <li class="task-list-item"><input type="checkbox" disabled checked> Day one: plan exists, site is live</li>
+  <li class="task-list-item"><input type="checkbox" disabled> First full week: every box checked</li>
+  <li class="task-list-item"><input type="checkbox" disabled> 245 lb — the first five, momentum is real</li>
+  <li class="task-list-item"><input type="checkbox" disabled> Elliptical 3× in one week</li>
+  <li class="task-list-item"><input type="checkbox" disabled> 240 lb — double digits gone</li>
+  <li class="task-list-item"><input type="checkbox" disabled> October: convert to the stationary bike (the cross-America machine)</li>
+  <li class="task-list-item"><input type="checkbox" disabled> 235 lb</li>
+  <li class="task-list-item"><input type="checkbox" disabled> 230 lb — inside the end-of-year goal band</li>
+  <li class="task-list-item"><input type="checkbox" disabled> 225 lb — stretch goal, apprenticeship-ready trajectory</li>
+</ul>
+
+  </main>
+  <script src="/js/rig.js" defer></script>
+  <script src="/js/food.js" defer></script>
+</body>
+</html>
