@@ -33,7 +33,7 @@ changing `- [ ]` to `- [x]`.
 | `/` | The plan overview |
 | `/rules/` | Permanent training rules (spine, left arm, skin, hips) |
 | `/exercises/` | Every movement with an animated stick-figure demo of correct form |
-| `/nutrition/` | The eating plan: 16:8 fasting, calorie/protein targets, the freezer-burrito batch system |
+| `/nutrition/` | 16:8 eating plan + interactive week planner: tap foods into meals with live calorie/protein totals, a pantry, and a computed shopping list (saved in your browser) |
 | `/weeks/` | Weekly logs, newest first, with done-counts |
 | `/progress/` | Stat tiles, weight chart vs the 1–1.5 lb/wk target zone with a projection, weekly consistency chart, milestones |
 

@@ -32,10 +32,13 @@ heroics; month-sized patience.
   Notes lines under each day = how it went. Frontmatter `weighIns:` = weight
   data (drives every chart).
 - `content/rules.md` — permanent constraints. Only edit if Dan says so.
-- `content/nutrition.md` — the eating plan: 16:8 fast (noon–8pm window, no
-  breakfast), ~2,100–2,200 kcal, 150–180 g protein in 2–3 big hits, freezer
-  burrito batch system. Calorie target moves with the weigh-in trend —
-  adjust it there when the corridor says so.
+- `content/nutrition.md` + `content/js/food.js` — the eating plan and the
+  interactive planner: 16:8 fast (noon–8pm, no breakfast), ~2,100 kcal,
+  150–180 g protein in 2–3 big hits. The food database, macros, and calorie
+  targets live in `food.js` (`FOODS`, `TARGET`); Dan's week plan/pantry
+  live in his browser's localStorage, so you can't see them — ask him.
+  When the weigh-in trend says adjust calories, change `TARGET` in food.js
+  and the prose in nutrition.md together.
 - `content/exercises.md` + `content/js/rig.js` — exercise guide and animated
   demos. Pose data is the `EXERCISES` object in rig.js (world-space joint
   angles per keyframe).
@@ -84,8 +87,9 @@ heroics; month-sized patience.
   the weeks index depend on them. `weighIns` is a list of `{date, lbs}`.
 - Checkboxes must stay in `- [ ]` / `- [x]` form — adherence is parsed from
   them at build time.
-- Charts are build-time SVG in `lib/charts.mjs` (no client JS); the demos are
-  the only client JS (`content/js/rig.js`, vanilla, no frameworks).
+- Charts are build-time SVG in `lib/charts.mjs` (no client JS). Client JS is
+  vanilla and framework-free: `content/js/rig.js` (demos) and
+  `content/js/food.js` (food planner, localStorage state).
 - Build: `npm install && npm run build` (Eleventy → `_site/`). Deploys via
   `.github/workflows/deploy.yml` on push.
 - New exercises need: a section in `exercises.md`, an entry in `EXERCISES`

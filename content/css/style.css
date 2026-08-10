@@ -335,6 +335,298 @@ main th {
   font-weight: 600;
 }
 
+/* Food planner */
+.fp-note {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.fp-days {
+  display: flex;
+  gap: 0.35rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.fp-day {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.45rem 0.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.fp-day.active {
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.fp-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rule);
+}
+
+.fp-dot.ok {
+  background: var(--viz-good);
+}
+
+.fp-totals {
+  margin-bottom: 1rem;
+}
+
+.fp-meter {
+  margin: 0.5rem 0;
+}
+
+.fp-meter-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.fp-meter-head strong {
+  color: var(--text);
+}
+
+.fp-ok { color: var(--viz-good) !important; }
+.fp-over, .fp-under { color: var(--text); }
+
+.fp-track {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--rule);
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.fp-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--viz-good);
+  opacity: 0.25;
+}
+
+.fp-fill {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  border-radius: 4px;
+  background: var(--viz-series1);
+}
+
+.fp-fill.fp-bg-ok { background: var(--viz-good); }
+
+.fp-slot {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 0.75rem 0.85rem;
+  margin: 0.75rem 0;
+}
+
+.fp-slot-head {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  font-size: 1rem;
+}
+
+.fp-slot-macros {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.fp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.6rem 0;
+}
+
+.fp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.15rem 0.3rem 0.15rem 0.7rem;
+  font-size: 0.95rem;
+}
+
+.fp-chip-x {
+  border: none;
+  background: var(--rule);
+  color: var(--text);
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.fp-add,
+.fp-btn {
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+}
+
+.fp-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.fp-picker {
+  margin-top: 0.6rem;
+}
+
+.fp-cat {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0.6rem 0 0.3rem;
+}
+
+.fp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  gap: 0.4rem;
+}
+
+.fp-food {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+.fp-food-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.fp-food-info {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.fp-shop {
+  list-style: none;
+  padding: 0;
+}
+
+.fp-shop li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fp-shop label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.fp-shop input[type="checkbox"] {
+  width: 1.1em;
+  height: 1.1em;
+  accent-color: var(--accent);
+}
+
+.fp-shop-why {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+
+.fp-shop + .fp-btn {
+  margin: 0.75rem 0 1rem;
+}
+
+.fp-pantry {
+  border-top: 1px solid var(--rule);
+}
+
+.fp-prow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fp-prow.has .fp-pname {
+  font-weight: 700;
+}
+
+.fp-pinfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.fp-punit {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.fp-pctl {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.fp-step {
+  border: 1px solid var(--rule);
+  background: none;
+  color: var(--text);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.fp-count {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Coach notes callout on week pages */
 .coach-notes {
   border-left: 3px solid var(--accent);
