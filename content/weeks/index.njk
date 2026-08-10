@@ -1,0 +1,13 @@
+---
+title: Weekly Logs
+permalink: /weeks/
+---
+<p>Newest week first. Check off each day as it's done.</p>
+<ul class="week-list">
+  {%- for week in collections.weeks %}
+  <li>
+    <a href="{{ week.url }}">Week {{ week.data.week }}</a>
+    <span class="dates">{{ week.data.dateRange }}</span>
+  </li>
+  {%- endfor %}
+</ul>

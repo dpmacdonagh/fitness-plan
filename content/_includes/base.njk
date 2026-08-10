@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · Fitness Plan</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/">Plan</a>
+    <a href="/rules/">Rules</a>
+    <a href="/weeks/">Weeks</a>
+  </nav>
+  <main>
+    <h1>{{ title }}</h1>
+    {{ content | safe }}
+  </main>
+</body>
+</html>
