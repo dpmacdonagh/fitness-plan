@@ -8,7 +8,7 @@ const KEY = "fitcoach-v2";
 const TOKEN_KEY = "fitcoach-token";
 
 const EMPTY = {
-  done: {}, weights: [], pantry: {}, shopChecked: {}, mealEdits: {}, customFoods: {},
+  done: {}, weights: [], pantry: {}, shopChecked: {}, mealChoice: {},
   updatedAt: 0,
   sync: { status: "off", detail: "" }, // device-only, never uploaded
 };
@@ -129,19 +129,15 @@ export function setPantry(id, n) {
 export function setShopChecked(id, v) {
   update((s) => ({ shopChecked: { ...s.shopChecked, [id]: v } }));
 }
-// Meal overrides: once a meal is edited, the full item list is owned by state.
-export function setMeal(mealId, items) {
-  update((s) => ({ mealEdits: { ...s.mealEdits, [mealId]: items } }));
+// Meal choices: a slot holds an option id ("L2") or a custom log
+// ({ custom: true, name, kcal, protein }). Absent = follow the plan.
+export function setChoice(key, choice) {
+  update((s) => ({ mealChoice: { ...s.mealChoice, [key]: choice } }));
 }
-export function resetMeal(mealId) {
+export function resetChoice(key) {
   update((s) => {
-    const mealEdits = { ...s.mealEdits };
-    delete mealEdits[mealId];
-    return { mealEdits };
+    const mealChoice = { ...s.mealChoice };
+    delete mealChoice[key];
+    return { mealChoice };
   });
-}
-export function addCustomFood(name, kcal, protein) {
-  const id = "cf-" + Date.now().toString(36);
-  update((s) => ({ customFoods: { ...s.customFoods, [id]: { name, kcal, protein } } }));
-  return id;
 }

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { getFood, CATS, FOODS, TARGET, mealTotals, dayMealTotals } from "../data/foods.js";
+import { MEALS, GROUPS, TARGET } from "../data/foods.js";
 import { EXERCISES } from "../data/exercises.js";
-import { doneId, isDone, mealId, effectiveMeal, effectiveMeals } from "../lib/plan.js";
-import { toggleDone, setMeal, resetMeal, addCustomFood } from "../store.js";
+import { doneId, isDone, mealKey, slotChoice, dayTotals } from "../lib/plan.js";
+import { toggleDone, setChoice, resetChoice } from "../store.js";
 import Rig from "./Rig.jsx";
 import Meter from "./Meter.jsx";
 import Shopping from "./Shopping.jsx";
@@ -37,7 +37,9 @@ function WorkoutItem({ item }) {
   );
 }
 
-function CustomFoodForm({ onAdd }) {
+const SLOT_LABELS = { m1: "Lunch · noon", m2: "Dinner · evening", m3: "Snack / top-up" };
+
+function CustomLogForm({ onLog }) {
   const [name, setName] = useState("");
   const [kcal, setKcal] = useState("");
   const [protein, setProtein] = useState("");
@@ -46,96 +48,72 @@ function CustomFoodForm({ onAdd }) {
       className="custom-form"
       onSubmit={(e) => {
         e.preventDefault();
-        const k = parseFloat(kcal), p = parseFloat(protein);
-        if (name.trim() && k >= 0 && p >= 0) {
-          onAdd(name.trim(), k, p || 0);
+        const k = parseFloat(kcal), p = parseFloat(protein) || 0;
+        if (name.trim() && k >= 0) {
+          onLog({ custom: true, name: name.trim(), kcal: k, protein: p });
           setName(""); setKcal(""); setProtein("");
         }
       }}
     >
-      <input placeholder="Food name" value={name} onChange={(e) => setName(e.target.value)} />
+      <input placeholder="What was it?" value={name} onChange={(e) => setName(e.target.value)} />
       <input placeholder="kcal" type="number" inputMode="numeric" min="0" value={kcal} onChange={(e) => setKcal(e.target.value)} />
       <input placeholder="protein g" type="number" inputMode="numeric" min="0" value={protein} onChange={(e) => setProtein(e.target.value)} />
-      <button className="btn" type="submit">Add</button>
+      <button className="btn" type="submit">Log it</button>
     </form>
   );
 }
 
-const SLOT_LABELS = {
-  m1: "Lunch · noon",
-  m2: "Dinner · evening",
-  m3: "Snacks / top-up",
-};
-
-function MealEditor({ week, day, slot, store }) {
+function MealSlot({ week, day, slot, store }) {
   const [open, setOpen] = useState(false);
-  const id = mealId(week, day.key, slot);
-  const items = effectiveMeal(week, day, slot, store.mealEdits);
-  const edited = store.mealEdits[id] !== undefined;
-  const t = mealTotals(items, store.customFoods);
-  const how = day.how && day.how[slot];
+  const key = mealKey(week, day.key, slot);
+  const chosen = slotChoice(week, day, slot, store.mealChoice);
+  const swapped = store.mealChoice[key] !== undefined;
+  const plannedId = day.meals[slot];
+  const groupIds = Object.keys(MEALS).filter((id) => MEALS[id].group === GROUPS[slot]);
+  const quickIds = Object.keys(MEALS).filter((id) => MEALS[id].group === "quick");
 
-  const change = (next) => setMeal(id, next);
-  const removeOne = (idx) => {
-    const next = items.map((x) => ({ ...x }));
-    next[idx].q -= 1;
-    change(next.filter((x) => x.q > 0));
-  };
-  const add = (foodId) => {
-    const next = items.map((x) => ({ ...x }));
-    const ex = next.find((x) => x.id === foodId);
-    if (ex) ex.q += 1; else next.push({ id: foodId, q: 1 });
-    change(next);
+  const pick = (id) => {
+    if (id === plannedId) resetChoice(key);
+    else setChoice(key, id);
+    setOpen(false);
   };
 
   return (
     <div className="meal">
       <div className="meal-head">
-        <strong>{SLOT_LABELS[slot]}{edited && <span className="edited-tag">edited</span>}</strong>
-        <span className="meal-macros">{Math.round(t.kcal)} kcal · {Math.round(t.protein)} g</span>
+        <strong>{SLOT_LABELS[slot]}{swapped && <span className="edited-tag">swapped</span>}</strong>
+        <span className="meal-macros">{Math.round(chosen.kcal)} kcal · {Math.round(chosen.protein)} g</span>
       </div>
-      {how && <p className="how">{how}</p>}
-      <ul className="meal-items">
-        {items.map((it, i) => {
-          const f = getFood(it.id, store.customFoods);
-          if (!f) return null;
-          return (
-            <li key={i}>
-              <span>{f.name}{it.q > 1 ? ` ×${it.q}` : ""} <span className="serv">({f.serving})</span></span>
-              <button className="item-x" aria-label={`Remove one ${f.name}`} onClick={() => removeOne(i)}>−</button>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="option">
+        <span className="option-name">{chosen.name}</span>
+        {chosen.desc && <span className="option-desc">{chosen.desc}</span>}
+      </div>
+      {chosen.how && <p className="how">{chosen.how}</p>}
       <div className="meal-actions">
-        <button className="link-btn" onClick={() => setOpen(!open)}>{open ? "close" : "+ add / edit"}</button>
-        {edited && <button className="link-btn" onClick={() => resetMeal(id)}>reset to plan</button>}
+        <button className="link-btn" onClick={() => setOpen(!open)}>{open ? "close" : "swap / log off-plan"}</button>
+        {swapped && <button className="link-btn" onClick={() => { resetChoice(key); setOpen(false); }}>back to plan</button>}
       </div>
       {open && (
         <div className="picker">
-          {CATS.map(([cat, label]) => (
-            <div key={cat}>
-              <div className="picker-cat">{label}</div>
-              <div className="picker-grid">
-                {Object.keys(FOODS).filter((fid) => FOODS[fid].cat === cat).map((fid) => (
-                  <button key={fid} className="food-btn" onClick={() => add(fid)}>
-                    <span className="food-name">{FOODS[fid].name}</span>
-                    <span className="food-info">{FOODS[fid].serving} · {FOODS[fid].kcal} kcal · {FOODS[fid].protein} g</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-          <div className="picker-cat">My foods</div>
-          <div className="picker-grid">
-            {Object.keys(store.customFoods).map((fid) => (
-              <button key={fid} className="food-btn" onClick={() => add(fid)}>
-                <span className="food-name">{store.customFoods[fid].name}</span>
-                <span className="food-info">{store.customFoods[fid].kcal} kcal · {store.customFoods[fid].protein} g</span>
+          <div className="picker-cat">The {GROUPS[slot]} options</div>
+          <div className="option-list">
+            {groupIds.map((id) => (
+              <button key={id} className={"option-btn" + (chosen.id === id ? " current" : "")} onClick={() => pick(id)}>
+                <span className="food-name">{MEALS[id].name}{id === plannedId ? " · planned" : ""}</span>
+                <span className="food-info">{MEALS[id].kcal} kcal · {MEALS[id].protein} g</span>
               </button>
             ))}
           </div>
-          <CustomFoodForm onAdd={(name, kcal, protein) => add(addCustomFood(name, kcal, protein))} />
+          <div className="picker-cat">Life happened</div>
+          <div className="option-list">
+            {quickIds.map((id) => (
+              <button key={id} className={"option-btn" + (chosen.id === id ? " current" : "")} onClick={() => pick(id)}>
+                <span className="food-name">{MEALS[id].name}</span>
+                <span className="food-info">{MEALS[id].kcal} kcal · {MEALS[id].protein} g</span>
+              </button>
+            ))}
+          </div>
+          <CustomLogForm onLog={(c) => { setChoice(key, c); setOpen(false); }} />
         </div>
       )}
     </div>
@@ -143,8 +121,7 @@ function MealEditor({ week, day, slot, store }) {
 }
 
 export default function DayCard({ week, day, store, isToday }) {
-  const meals = effectiveMeals(week, day, store.mealEdits);
-  const t = dayMealTotals(meals, store.customFoods);
+  const t = dayTotals(week, day, store.mealChoice);
   const kcalOk = t.kcal >= TARGET.kcalLow && t.kcal <= TARGET.kcalHigh;
   const pOk = t.protein >= TARGET.pLow;
   return (
@@ -167,7 +144,7 @@ export default function DayCard({ week, day, store, isToday }) {
         <div className="card-tag">Eat</div>
         <h3>Fast until noon · window closes 8pm</h3>
         {["m1", "m2", "m3"].map((slot) => (
-          <MealEditor key={slot} week={week} day={day} slot={slot} store={store} />
+          <MealSlot key={slot} week={week} day={day} slot={slot} store={store} />
         ))}
         <Meter label={`Day total (target ${TARGET.kcalLow}–${TARGET.kcalHigh})`} value={t.kcal} unit="kcal" lo={TARGET.kcalLow} hi={TARGET.kcalHigh} max={3000} good={kcalOk} />
         <Meter label={`Protein (target ${TARGET.pLow}–${TARGET.pHigh})`} value={t.protein} unit="g" lo={TARGET.pLow} hi={TARGET.pHigh} max={220} good={pOk} />

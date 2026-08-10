@@ -1,15 +1,15 @@
-import { getFood, FOODS } from "../data/foods.js";
+import { INGREDIENTS } from "../data/foods.js";
 import { shoppingRows } from "../lib/plan.js";
 import { setPantry, setShopChecked, update } from "../store.js";
 
 export default function Shopping({ week, store }) {
-  const rows = shoppingRows(week, store.pantry, store.mealEdits, store.customFoods);
+  const rows = shoppingRows(week, store.pantry, store.mealChoice);
   if (!rows.length) return <p className="note">Nothing to buy — the pantry covers the whole week.</p>;
   return (
     <div className="shopping">
       <ul className="shop-list">
         {rows.map((r) => {
-          const f = getFood(r.id, store.customFoods);
+          const f = INGREDIENTS[r.id];
           return (
             <li key={r.id}>
               <label>
@@ -19,7 +19,7 @@ export default function Shopping({ week, store }) {
                   onChange={(e) => setShopChecked(r.id, e.target.checked)}
                 />
                 <span>{r.packs} × {f.pack} — {f.name}</span>
-                <span className="shop-why">{r.need} servings planned{r.have ? `, ${r.have} in pantry` : ""}</span>
+                <span className="shop-why">{r.need} used this week{r.have ? `, ${r.have} in pantry` : ""}</span>
               </label>
             </li>
           );
@@ -31,9 +31,9 @@ export default function Shopping({ week, store }) {
           update((s) => {
             const pantryNext = { ...s.pantry };
             const checkedNext = { ...s.shopChecked };
-            for (const r of shoppingRows(week, s.pantry, s.mealEdits, s.customFoods)) {
+            for (const r of shoppingRows(week, s.pantry, s.mealChoice)) {
               if (checkedNext[r.id]) {
-                pantryNext[r.id] = (pantryNext[r.id] || 0) + r.packs * getFood(r.id, s.customFoods).perPack;
+                pantryNext[r.id] = (pantryNext[r.id] || 0) + r.packs * INGREDIENTS[r.id].perPack;
                 checkedNext[r.id] = false;
               }
             }
@@ -48,17 +48,16 @@ export default function Shopping({ week, store }) {
 }
 
 export function Pantry({ store }) {
-  const ids = [...Object.keys(FOODS), ...Object.keys(store.customFoods)];
   return (
     <div className="pantry">
-      {ids.map((id) => {
-        const f = getFood(id, store.customFoods);
+      {Object.keys(INGREDIENTS).map((id) => {
+        const f = INGREDIENTS[id];
         const have = store.pantry[id] || 0;
         return (
           <div key={id} className={"prow" + (have > 0 ? " has" : "")}>
             <div className="pinfo">
               <span className="pname">{f.name}</span>
-              <span className="punit">servings of {f.serving}</span>
+              <span className="punit">servings on hand</span>
             </div>
             <div className="pctl">
               <button className="step" aria-label={`One less ${f.name}`} onClick={() => setPantry(id, have - 1)}>−</button>

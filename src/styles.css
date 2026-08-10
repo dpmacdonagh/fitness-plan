@@ -256,25 +256,44 @@ body {
   margin: 0.6rem 0 0.3rem;
 }
 
-.picker-grid {
+.option {
+  display: flex;
+  flex-direction: column;
+  margin: 0.25rem 0;
+}
+
+.option-name {
+  font-weight: 650;
+}
+
+.option-desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.option-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.4rem;
 }
 
-.food-btn {
+.option-btn {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1rem;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
   border: 1px solid var(--rule);
   border-radius: 10px;
   background: none;
   color: var(--text);
   font: inherit;
   text-align: left;
-  padding: 0.4rem 0.6rem;
+  padding: 0.5rem 0.7rem;
   cursor: pointer;
+}
+
+.option-btn.current {
+  border-color: var(--accent);
 }
 
 .food-name { font-size: 0.92rem; font-weight: 600; }

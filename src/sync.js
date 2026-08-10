@@ -11,7 +11,7 @@ const PATH = "data/state.json";
 const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${PATH}`;
 const API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
 
-const SYNCED_FIELDS = ["done", "weights", "pantry", "shopChecked", "mealEdits", "customFoods"];
+const SYNCED_FIELDS = ["done", "weights", "pantry", "shopChecked", "mealChoice"];
 
 export function pickSynced(state) {
   const doc = {};

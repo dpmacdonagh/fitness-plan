@@ -33,7 +33,15 @@ data. Celebrate checkmarks. Month-sized patience.
   day; `weighIns` (canonical weight data); `done` (coach-confirmed
   completion per day: `{ mon: { workout: true, habits: true } }`);
   `coachNotes`. Also `PLAN` (targets) and `MILESTONES`.
-- `src/data/foods.js` — food database + `TARGET` calorie/protein numbers.
+- `src/data/foods.js` — **the set menu**: exactly 3 options per group
+  (L1–L3 lunch, D1–D3 dinner, S1–S3 snack) with FIXED whole-meal macros,
+  plus Q1–Q3 off-plan quick logs (gas station / fast food / grocery
+  premade). Days assign option ids. Keep it to 3 per group — Dan asked for
+  fewer choices, not more; rotate options in/out rather than adding.
+  `INGREDIENTS` exists only for the shopping list/pantry. When day totals
+  drift, adjust option composition or day assignments so every day lands
+  in the 1,800–2,300 kcal / ≥150 g protein band (verify with a quick node
+  script over MEALS × days).
 - `src/data/exercises.js` — exercise library: cues, cautions, and the
   animated rig poses (world-space joint angles; screenshot-verify changes).
 - **App state syncs to the `app-state` branch** (`data/state.json`): his
