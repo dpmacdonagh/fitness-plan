@@ -31,15 +31,13 @@ jobs:
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
-      - name: Build site
-        run: npx @11ty/eleventy --pathprefix "${{ steps.pages.outputs.base_path }}"
+      - name: Build app
+        run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
   deploy:
     needs: build
