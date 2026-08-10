@@ -28,49 +28,49 @@ export const WEEKS = [
   {
     week: 1,
     start: "2026-08-10", // Monday
-    focus: "Week one. Checkmarks are the goal. This week's lunches are quick-assemble (first big Sunday prep is the 16th — after that, lunches come out of the batch).",
+    focus: "Bridge week: store-bought food only (keep days under ~2,000 kcal, grab protein where you can), cooking starts after Sunday's first prep. Boil protocol active: no friction cardio until it's calm AND the compression shorts arrive — strength and core carry the week.",
     weighIns: [{ date: "2026-08-10", lbs: 250 }],
     days: [
       {
         key: "mon", name: "Monday",
         workout: { title: "Walk + core trio", minutes: 25, items: [{ text: "20-min walk, easy pace" }, ...CORE_TRIO], after: "Shower right after." },
-        meals: { m1: "L2", m2: "D1", m3: "S2" },
+        meals: { m1: "L3", m2: "Q3", m3: "S1" },
         prep: ["Weigh in (morning, before coffee) and tell the coach.", "Store run for the week: check the Buy list on the Food tab."],
       },
       {
         key: "tue", name: "Tuesday",
         workout: { title: "Strength A", minutes: 15, items: STRENGTH_A, after: "Stop every set 3–4 reps short of failure." },
-        meals: { m1: "L2", m2: "D2", m3: "S1" },
+        meals: { m1: "L3", m2: "Q3", m3: "S1" },
         prep: [],
       },
       {
         key: "wed", name: "Wednesday",
-        workout: { title: "Walk + core trio", minutes: 25, items: [{ text: "20-min walk, easy pace" }, ...CORE_TRIO], after: "Boil check tonight: calm = elliptical tomorrow, angry = walk instead." },
-        meals: { m1: "L3", m2: "D3", m3: "S1" },
+        workout: { title: "Core trio + bridges (no friction)", minutes: 15, items: [...CORE_TRIO, { ex: "glute-bridge", dose: "2×12" }], after: "Nothing that rubs the boil. Warm compress on it tonight; keep it covered." },
+        meals: { m1: "L3", m2: "Q3", m3: "S1" },
         prep: ["BP wash day (Mon/Wed/Fri)."],
       },
       {
         key: "thu", name: "Thursday",
-        workout: { title: "Elliptical (or walk)", minutes: 20, items: [{ text: "Elliptical 20 min, conversational pace" }, { text: "Fallback if the boil is angry: 25-min walk" }], after: "Compression shorts + anti-chafe balm. Shower immediately after." },
-        meals: { m1: "L2", m2: "D1", m3: "S2" },
+        workout: { title: "Core trio + bridges (no friction)", minutes: 15, items: [...CORE_TRIO, { ex: "glute-bridge", dose: "2×12" }], after: "Cardio stays suspended until the boil is calm AND the compression shorts arrive. Boil check: better or worse than yesterday? Tell the coach." },
+        meals: { m1: "L3", m2: "Q3", m3: "S1" },
         prep: [],
       },
       {
         key: "fri", name: "Friday",
         workout: { title: "Strength A (again)", minutes: 15, items: STRENGTH_A, after: "Core trio optional if you feel good." },
-        meals: { m1: "L3", m2: "D3", m3: "S1" },
+        meals: { m1: "L3", m2: "Q3", m3: "S1" },
         prep: ["BP wash day."],
       },
       {
         key: "sat", name: "Saturday",
-        workout: { title: "Walk somewhere new", minutes: 30, items: [{ text: "30-min walk: trailhead, park, river path. The get-out-of-the-car rep." }], after: "" },
-        meals: { m1: "L2", m2: "D2", m3: "S3" },
+        workout: { title: "Conditional: test walk or core", minutes: 15, items: [{ text: "ONLY if the boil is calm and the shorts arrived: 15-min gentle test walk, stop at the first hint of rubbing." }, { text: "Otherwise: core trio + 2×12 glute bridges. Protecting the skin IS the plan." }], after: "" },
+        meals: { m1: "L3", m2: "Q3", m3: "S1" },
         prep: [],
       },
       {
         key: "sun", name: "Sunday",
         workout: { title: "Off", minutes: 0, items: [{ text: "Rest day. Shower anyway." }], after: "" },
-        meals: { m1: "L2", m2: "D1", m3: "S1" },
+        meals: { m1: "L3", m2: "L1", m3: "S1" },
         prep: [
           "THE SUNDAY HOUR (~60 min, feeds next week's lunches):",
           "1. Rice: 3 cups dry in a pot, ~25 min — start it first.",
@@ -84,7 +84,7 @@ export const WEEKS = [
       },
     ],
     done: {},
-    coachNotes: "",
+    coachNotes: "Mon 8/10: boil on leg still angry after self-lancing; 5-min walk agitated it (compression shorts on order). Friction cardio suspended, strength/core substituted — rule 3 bends the plan, never breaks. Eating is store-bought under ~2k/day until the first Sunday prep on 8/16. Watch-fors given: spreading redness, streaks, fever = urgent care.",
   },
 ];
 
